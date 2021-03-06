@@ -1,23 +1,11 @@
-# JenkinsCI : Continious Integration
+# JenkinsCI : Continious Delivery
 ---
 
-## Toolset for the CI Pipeline
-The example project for which we are implementing CI is a simple Maven Java Web application. In
-this lab, we will see Jenkins working closely with many other tools. The following table
-contains the list of tools and technologies involved in everything that we will be seeing:
-   The example project for which we are implementing CI is a simple Maven project. 
-   
-   |   Tool | Role |
-|---------|------------| 
-|**Jenkins**| Continuous Integration tool|
-|**Java**  |Primary programming language used for coding |
-|**Maven** |Build tool|
-|**JUnit** |Unit testing and integration testing tools |
-|**GitHub** |Version control system |
-|**SonarQube** |Static code analysis tool |
-| **Sonatype Nexus OSS** |Binary repository manager|
 
-## Required Setup for the Pipeline
+
+This Delivery Pipeline extends the  CI Pipeline implemented in the previous Lab. (`07-jenkins-cicd-pipeline-maven-01-continious-integration`). It adds  the steps related to the deployment of the application in the Staging server, the performance analysis, and the promotion of the  artificat to the release repository. 
+
+## Required Setup for the Delivery Pipeline
 
 ### Starting SonarQube and configuring the Web Hook
 
@@ -80,19 +68,26 @@ In the Create User page,
      In case you want more details for user creation, then [click here](https://help.sonatype.com/repomanager3/security/users).
 
 - Install and Configure Nexus Plugins in Jenkins
-Here you are going to install and configure a few plugins for Nexus in Jenkins. For this, go to Jenkins and then Dashboard > Manage Jenkins > Manage Plugins > Available and search and install** Nexus Artifact Uploader** and **Pipeline Utility Steps**.
+Here you are going to install and configure a few plugins for Nexus in Jenkins. For this, go to Jenkins and then Dashboard > Manage Jenkins > Manage Plugins > Available and search and install **Nexus Artifact Uploader** and **Pipeline Utility Steps**.
 
 - Add Nexus Repository Manager's user credentials in Jenkins. Go to Dashboard > Credentials > System > Global credentials (unrestricted), as shown below:
 ![illustration](images/nexus_user_jenkins.png)
 
-## The CI pipeline
+## The Delivery pipeline
 
-This is the structure of the CI pipeline:
-1. Fetch the code from the version control system (SCM) 
-2. Build and unit test the code, and publish a unit test report on Jenkins.
-3. Perform static code analysis on SonarQube. Fail if the pipeline if the quality  gate is not passed.
-1. Perform integration testing and publish a unit test report on Jenkins.
-2. Upload the built artifacts to Nexus along with the POM file.
+This is the stages  of the Delivery pipeline:
+ - Clone App from Git
+ - Build and Unit Test (Maven/JUnit)
+ - Static Code Analysis (SonarQube)
+ - Checking the Quality Gate
+ - Integration Test (Maven/JUnit)
+ - Publish to Nexus Repository Manager
+ - Start the Staging Server
+ - Deploy the app on the staging 
+ - Do the Performance Testing
+ - Publish the performance reports
+ - Promote the app in  Nexus Repository Manager
+ - Clean Up : Stop the Stagin Server
    
 The figure below shows the stages of the pipeline.
 ![Pipeline](images/pipeline.png)
