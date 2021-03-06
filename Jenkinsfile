@@ -16,7 +16,7 @@ pipeline{
         stage("Clone App from Git"){
             steps{
                 echo "====++++  Clone App from Git ++++===="
-                git branch:"master", url: "https://github.com/mromdhani/08-jenkins-cicd-pipeline-maven-01-continious-integration.git"
+                git branch:"master", url: "https://github.com/mromdhani/08-jenkins-cicd-pipeline-maven-02-continious-delivery.git"
             }          
         }
         // Build and Unit Test (Maven/JUnit)
