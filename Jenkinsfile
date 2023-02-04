@@ -4,12 +4,12 @@ pipeline{
         maven "localmaven"
     }
     environment {
-        NEXUS_VERSION = "nexus3"
+        NEXUS_VERSION = "nexus2"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "192.168.196.161:8081"
-        NEXUS_REPOSITORY_SNAPSHOT = "mylocalrepo-snapshots"
+        NEXUS_REPOSITORY_SNAPSHOT = "maven-snapshots"
         NEXUS_REPOSITORY_RELEASE = "mylocalrepo-releases"
-        NEXUS_CREDENTIAL_ID = "nexus-user-credentials"    
+        NEXUS_CREDENTIAL_ID = "93f78a51-e2bf-4c5a-a2a9-de3e8a239479"    
     }
     
     stages{
